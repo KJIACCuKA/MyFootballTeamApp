@@ -18,6 +18,14 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .compact
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
+    }()
+    
     private lazy var menuTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +41,7 @@ class MainViewController: UIViewController {
         title = "ЛФК Боавишта"
         view.backgroundColor = .systemBackground
         setupUI()
+        createNavBar()
     }
     
     private func setupUI() {
@@ -51,19 +60,48 @@ class MainViewController: UIViewController {
             menuTableView.topAnchor.constraint(equalTo: teamImageView.bottomAnchor, constant: 30)
         ])
     }
+    
+    private func createNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: datePicker)
+    }
 }
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        Constants.menu.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(MenuCell.self)", for: indexPath) as? MenuCell else { return UITableViewCell() }
+        cell.setupTitleLable(indexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            print("Tap")
+        case 1:
+            goToScheduleVC()
+        case 2:
+            print("Tap")
+        case 3:
+            print("Tap")
+        case 4:
+            print("Tap")
+        default:
+            print("deafult")
+        }
     }
 }
 
 extension MainViewController: UITableViewDelegate {
     
+}
+
+extension MainViewController {
+    func goToScheduleVC() {
+        let scheduleVC = ScheduleViewController()
+        navigationController?.pushViewController(scheduleVC, animated: true)
+    }
 }
