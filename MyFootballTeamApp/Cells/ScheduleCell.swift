@@ -40,8 +40,8 @@ class ScheduleCell: UITableViewCell {
     }
     
     func setupTitleLable(indexPath: IndexPath) {
-        homeTeamLabel.text = Constants.homeTeam[indexPath.row]
-        guestTeamLabel.text = Constants.guestTeam[indexPath.row]
-        tourLabel.text = "\(Constants.tourNumber[indexPath.row]) тур"
+        homeTeamLabel.text = MockDataEnums.homeTeam[indexPath.row]
+        guestTeamLabel.text = MockDataEnums.guestTeam[indexPath.row]
+        tourLabel.text = "\(MockDataEnums.tourNumber[indexPath.row]) тур"
     }
 }

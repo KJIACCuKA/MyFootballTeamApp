@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Constants.menu.count
+        MockDataEnums.menu.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,7 +84,7 @@ extension MainViewController: UITableViewDataSource {
         case 1:
             goToScheduleVC()
         case 2:
-            print("Tap")
+            goToPlayersVC()
         case 3:
             print("Tap")
         case 4:
@@ -103,5 +103,10 @@ extension MainViewController {
     func goToScheduleVC() {
         let scheduleVC = ScheduleViewController()
         navigationController?.pushViewController(scheduleVC, animated: true)
+    }
+    
+    func goToPlayersVC() {
+        let playersVC = PlayersViewController()
+        navigationController?.pushViewController(playersVC, animated: true)
     }
 }

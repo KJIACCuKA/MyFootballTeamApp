@@ -43,6 +43,6 @@ final class MenuCell: UITableViewCell {
     }
     
     func setupTitleLable(indexPath: IndexPath) {
-        titleLable.text = Constants.menu[indexPath.row]
+        titleLable.text = MockDataEnums.menu[indexPath.row]
     }
 }
