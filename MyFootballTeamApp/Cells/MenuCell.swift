@@ -9,7 +9,7 @@ import UIKit
 
 final class MenuCell: UITableViewCell {
     
-    private lazy var titleLable = UILabel(text: "", font: .italicSystemFont(ofSize: 16), aligment: .right)
+    private lazy var titleLable = UILabel(text: "", font: .italicSystemFont(ofSize: 16), aligment: .right, numberOfLines: 1)
     
     private lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView()

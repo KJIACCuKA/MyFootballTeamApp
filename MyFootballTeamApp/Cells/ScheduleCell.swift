@@ -9,12 +9,12 @@ import UIKit
 
 class ScheduleCell: UITableViewCell {
     
-    private lazy var homeTeamLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left)
-    private lazy var guestTeamLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left)
-    private lazy var tourLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left)
-    private lazy var vsLabel = UILabel(text: "vs", font: .systemFont(ofSize: 10), aligment: .left)
+    private lazy var homeTeamLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left, numberOfLines: 1)
+    private lazy var guestTeamLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left, numberOfLines: 1)
+    private lazy var tourLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left, numberOfLines: 1)
+//    private lazy var vsLabel = UILabel(text: "vs", font: .systemFont(ofSize: 10), aligment: .left, numberOfLines: 1)
     
-    private lazy var horizontalStackView = UIStackView(arrangedSubviews: [homeTeamLabel, vsLabel, guestTeamLabel], axis: .horizontal, spacing: 3, distribution: .fillProportionally)
+    private lazy var horizontalStackView = UIStackView(arrangedSubviews: [homeTeamLabel], axis: .horizontal, spacing: 3, distribution: .fillProportionally)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,7 +32,7 @@ class ScheduleCell: UITableViewCell {
         NSLayoutConstraint.activate([
             horizontalStackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             horizontalStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
-//            horizontalStackView.trailingAnchor.constraint(equalTo: tourLabel.leadingAnchor, constant: -50),
+//            horizontalStackView.trailingAnchor.constraint(equalTo: tourLabel.leadingAnchor, constant: -10),
             
             tourLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             tourLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
@@ -40,8 +40,9 @@ class ScheduleCell: UITableViewCell {
     }
     
     func setupTitleLable(indexPath: IndexPath) {
-        homeTeamLabel.text = MockDataEnums.homeTeam[indexPath.row]
-        guestTeamLabel.text = MockDataEnums.guestTeam[indexPath.row]
+        let title = MockDataEnums.homeTeam[indexPath.row] + " - " + MockDataEnums.guestTeam[indexPath.row]
+        
+        homeTeamLabel.text = title
         tourLabel.text = "\(MockDataEnums.tourNumber[indexPath.row]) тур"
     }
 }

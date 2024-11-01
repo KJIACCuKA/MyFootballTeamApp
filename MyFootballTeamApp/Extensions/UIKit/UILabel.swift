@@ -10,12 +10,12 @@ import UIKit
 extension UILabel {
     
     // - Инициализируем свойства, которые будем использовать для UILabel
-    convenience init(text: String, font: UIFont?, aligment: NSTextAlignment = .left) {
+    convenience init(text: String, font: UIFont?, aligment: NSTextAlignment = .left, numberOfLines: Int) {
         self.init()
         
         self.text = text
         self.font = font
-        self.numberOfLines = 0
+        self.numberOfLines = numberOfLines
         self.textColor = .black
         self.textAlignment = aligment
         self.adjustsFontSizeToFitWidth = true

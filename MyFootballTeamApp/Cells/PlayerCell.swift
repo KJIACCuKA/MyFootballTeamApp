@@ -9,7 +9,13 @@ import UIKit
 
 final class PlayerCell: UITableViewCell {
     
-    private lazy var playerNameLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left)
+    private lazy var playerNameLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 14), aligment: .left, numberOfLines: 2)
+    private lazy var playerAgeLabel = UILabel(text: "", font: .systemFont(ofSize: 12), aligment: .left, numberOfLines: 2)
+    private lazy var playerPositionLabel = UILabel(text: "", font: .systemFont(ofSize: 12), aligment: .left, numberOfLines: 2)
+    private lazy var playerGoalsLabel = UILabel(text: "", font: .systemFont(ofSize: 12), aligment: .left, numberOfLines: 2)
+    private lazy var playerPassesLabel = UILabel(text: "", font: .systemFont(ofSize: 12), aligment: .left, numberOfLines: 2)
+    private lazy var playedMatchesLabel = UILabel(text: "0", font: .systemFont(ofSize: 12), aligment: .left, numberOfLines: 2)
+
     
     private lazy var playerImageView: UIImageView = {
         let imageView = UIImageView()
@@ -17,6 +23,10 @@ final class PlayerCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
+    
+    private lazy var verticalStackView = UIStackView(arrangedSubviews: [playerNameLabel, playerAgeLabel, playerPositionLabel], axis: .vertical, spacing: 3, distribution: .fillProportionally)
+    
+    private lazy var verticalGameStatsStackView = UIStackView(arrangedSubviews: [playedMatchesLabel, playerGoalsLabel, playerPassesLabel], axis: .vertical, spacing: 3, distribution: .fillProportionally)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,7 +38,8 @@ final class PlayerCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.addSubview(playerNameLabel)
+        self.addSubview(verticalStackView)
+        self.addSubview(verticalGameStatsStackView)
         self.addSubview(playerImageView)
         
         NSLayoutConstraint.activate([
@@ -37,14 +48,24 @@ final class PlayerCell: UITableViewCell {
             playerImageView.heightAnchor.constraint(equalToConstant: 80),
             playerImageView.widthAnchor.constraint(equalToConstant: 80),
             
-            playerNameLabel.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 15),
-            playerNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            playerNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40)
+            verticalStackView.leadingAnchor.constraint(equalTo: playerImageView.trailingAnchor, constant: 15),
+            verticalStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            verticalStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -100),
+            
+            verticalGameStatsStackView.leadingAnchor.constraint(equalTo: verticalStackView.trailingAnchor, constant: 15),
+            verticalGameStatsStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            verticalGameStatsStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
         ])
     }
     
-    func setupTitleLable(indexPath: IndexPath) {
-        playerImageView.image = PlayersMockData.playersPhoto[indexPath.row]
-        playerNameLabel.text = PlayersMockData.playersNames[indexPath.row]
+    func setupInfoLables(indexPath: IndexPath) {
+        let playerData = PlayersMockData.players[indexPath.row]
+        playerImageView.image = playerData.photo
+        playerNameLabel.text = playerData.name
+        playerAgeLabel.text = playerData.age
+        playerPositionLabel.text = playerData.position
+        playerGoalsLabel.text = "Голов: \(playerData.goals)"
+        playerPassesLabel.text = "Ассисты: \(playerData.assists)"
+        playedMatchesLabel.text = "Матчей: \(playerData.playedMatches)"
     }
 }

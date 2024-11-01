@@ -39,12 +39,12 @@ class PlayersViewController: UIViewController {
 
 extension PlayersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        PlayersMockData.playersPhoto.count
+        PlayersMockData.players.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(PlayerCell.self)", for: indexPath) as? PlayerCell else { return UITableViewCell() }
-        cell.setupTitleLable(indexPath: indexPath)
+        cell.setupInfoLables(indexPath: indexPath)
         return cell
     }
 }
